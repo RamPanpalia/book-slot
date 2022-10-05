@@ -1,23 +1,25 @@
-import logo from './logo.svg';
+import React, { useState } from 'react';
 import './App.css';
+import DateRangePicker from 'rsuite/DateRangePicker';
+// Documentation https://rsuitejs.com/components/date-range-picker/
+import 'rsuite/dist/rsuite.min.css';
 
 function App() {
+  const [fal, setFal] = useState([new Date(),new Date()]);
   return (
     <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+      <p>Date Time Range</p>
+      <DateRangePicker
+        size="lg"
+        format="dd-MM-yyyy HH:mm:ss"
+        defaultCalendarValue={fal}
+        onChange={(value)=>{setFal(value)}}
+      />
+      <br/>
+      {/* {typeof(fal[0].toString())} */}
+      {fal[0].toString()}
+      <br/>
+      {fal[1].toString()}
     </div>
   );
 }
