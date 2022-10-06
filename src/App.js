@@ -1,25 +1,58 @@
 import React, { useState } from 'react';
 import './App.css';
+import Slot from './Slot'
 import DateRangePicker from 'rsuite/DateRangePicker';
 // Documentation https://rsuitejs.com/components/date-range-picker/
 import 'rsuite/dist/rsuite.min.css';
+import { Button } from 'rsuite';
+
 
 function App() {
-  const [fal, setFal] = useState([new Date(),new Date()]);
+  const [fal, setFal] = useState([new Date(), new Date()]);
+  const [freeSlots, setFreeSlots] = useState(
+    [{
+      name: 'Dr. John Doe',
+      date: new Date(),
+      from: '3 PM',
+      till: '5PM',
+    },
+    {
+      name: 'Dr. John Doe',
+      date: new Date(),
+      from: '3 PM',
+      till: '5PM',
+    },]
+  );
   return (
     <div className="App">
-      <p>Date Time Range</p>
-      <DateRangePicker
-        size="lg"
-        format="dd-MM-yyyy HH:mm:ss"
-        defaultCalendarValue={fal}
-        onChange={(value)=>{setFal(value)}}
-      />
-      <br/>
-      {/* {typeof(fal[0].toString())} */}
-      {fal[0].toString()}
-      <br/>
-      {fal[1].toString()}
+      <div className='col col-1'>
+        <div>Find free Slots</div>
+        <DateRangePicker
+          size="lg"
+          format="dd-MM-yyyy HH:mm:ss"
+          defaultCalendarValue={fal}
+          onChange={(value) => { setFal(value) }}
+        />
+        <div>
+          <b> From : </b>{fal[0].toString().slice(0, 24)} ~~ <b> Till : </b> {fal[1].toString().slice(0, 24)}
+        </div>
+        <Button appearance="primary" active>
+          Find
+        </Button>
+      </div>
+      <div className='col col-2'>
+        {freeSlots.map((ele) => {
+          return (
+            <Slot
+              name={ele.name}
+              date={ele.date.toString()}
+              from={ele.from}
+              till={ele.till}
+            />)
+        })}
+        {/* <Slot/>
+        <Slot/> */}
+      </div>
     </div>
   );
 }

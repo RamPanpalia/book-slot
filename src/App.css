@@ -1,0 +1,36 @@
+.App{
+    display: grid;
+    grid-template-columns: 2fr 4fr 1fr;
+}
+.col{
+    display: flex;
+    flex-direction: column;
+    width: fit-content;
+    margin: 5px 10px;
+    padding: 20px;
+    width: 100%;
+    max-height: 100vh;
+    overflow-y: scroll;
+}
+.col-1>div{
+    padding: 15px 5px;
+}
+.slot>div{
+    padding: 10px 5px;
+}
+.col-1{
+    border-right: 2px solid gray;
+}
+.slot{
+    border: 2px solid rgb(104, 104, 104);
+    border-radius: 4px;
+    padding: 10px;
+    margin: 10px 0;
+    width: 100%;
+}
+.time span{
+    padding: 0 3px;
+}
+.name{
+    font-size: 22px;
+}
