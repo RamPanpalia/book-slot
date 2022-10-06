@@ -40,15 +40,17 @@ function App() {
       from: '3 PM',
       till: '5PM',
     },
-  ]
+    ]
   );
   return (
     <div className="App">
       <div className='col col-1'>
-        <div>Find free Slots</div>
+        <div>Find Free Slots</div>
         <DateRangePicker
           size="lg"
-          format="dd-MMM-yyyy HH:mm:ss"
+          format="dd-MMM-yyyy"
+          // aria-expanded={true}
+          open={true}
           defaultCalendarValue={fal}
           onChange={(value) => { setFal(value) }}
         />

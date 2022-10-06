@@ -6,7 +6,7 @@ import { Button } from 'rsuite';
 const Slot = (props) => {
     return (
         <div className='slot'>
-            <div className='name'>{props.name}</div>
+            {/* <div className='name'>{props.name}</div> */}
             <div className='Date'>{props.date}</div>
             <div className='time'>
                 <span className='from'>{props.from}</span>
@@ -14,7 +14,7 @@ const Slot = (props) => {
                 <span className='till'>{props.till}</span>
                 <span className='Duration'>2 Hrs.</span>
             </div>
-            <Button appearance="primary">
+            <Button appearance="primary" active>
                 BOOK
             </Button>
         </div>
