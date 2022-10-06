@@ -11,6 +11,24 @@ function App() {
   const [fal, setFal] = useState([new Date(), new Date()]);
   const [freeSlots, setFreeSlots] = useState(
     [{
+      name: 'Dr. Sunil Verma',
+      date: new Date(),
+      from: '3 PM',
+      till: '5PM',
+    },
+    {
+      name: 'Dr. Prabhakar Mishra',
+      date: new Date(),
+      from: '3 PM',
+      till: '5PM',
+    },
+    {
+      name: 'Dr. Ajay Raut',
+      date: new Date(),
+      from: '3 PM',
+      till: '5PM',
+    },
+    {
       name: 'Dr. John Doe',
       date: new Date(),
       from: '3 PM',
@@ -21,7 +39,8 @@ function App() {
       date: new Date(),
       from: '3 PM',
       till: '5PM',
-    },]
+    },
+  ]
   );
   return (
     <div className="App">
@@ -29,7 +48,7 @@ function App() {
         <div>Find free Slots</div>
         <DateRangePicker
           size="lg"
-          format="dd-MM-yyyy HH:mm:ss"
+          format="dd-MMM-yyyy HH:mm:ss"
           defaultCalendarValue={fal}
           onChange={(value) => { setFal(value) }}
         />
