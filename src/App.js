@@ -61,11 +61,11 @@ function App() {
         <div className='col col-1'>
           <div>Find Free Slots</div>
           <LocalizationProvider dateAdapter={AdapterDayjs}>
-            <CalendarPicker date={date} onChange={(newDate) =>{ setDate(newDate)}} />
+            <CalendarPicker className='date-picker' date={date} onChange={(newDate) =>{ setDate(newDate)}} />
           </LocalizationProvider>
           
-          <Button className='find-btn' appearance="primary" active>
-            Find
+          <Button className='find-btn btn' appearance="primary" active>
+            FIND
           </Button>
         </div>
         <div className='col col-2'>

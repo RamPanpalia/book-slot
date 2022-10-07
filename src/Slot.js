@@ -14,7 +14,7 @@ const Slot = (props) => {
                 <span className='till'>{props.till}</span>
                 <span className='Duration'>30 Min.</span>
             </div>
-            <Button appearance="primary" active>
+            <Button className='book-btn btn' appearance="primary" active>
                 BOOK
             </Button>
         </div>
