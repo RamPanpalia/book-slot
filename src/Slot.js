@@ -10,7 +10,7 @@ const Slot = (props) => {
             <div className='Date'>{props.date.slice(0,24)}</div>
             <div className='time'>
                 <span className='from'>{props.from}</span>
-                ~
+                -
                 <span className='till'>{props.till}</span>
                 <span className='Duration'>30 Min.</span>
             </div>
