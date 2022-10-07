@@ -44,9 +44,9 @@ img{
     padding: 10px 5px;
 }
 
-.col-1 {
+/* .col-1 {
     border-right: 2px solid gray;
-}
+} */
 
 .slot {
     display: flex;
