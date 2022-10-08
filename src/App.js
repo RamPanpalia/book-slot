@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import './App.css';
 import icon from './FOOZIE.webp'
 import Slot from './Slot'
-import DatePicker from 'rsuite/DatePicker';
+// import DatePicker from 'rsuite/DatePicker';
 // Documentation https://rsuitejs.com/components/date-range-picker/
 import 'rsuite/dist/rsuite.min.css';
 import { Button } from 'rsuite';
@@ -13,7 +13,7 @@ import { CalendarPicker } from '@mui/x-date-pickers/CalendarPicker';
 
 
 function App() {
-  const [fal, setFal] = useState(new Date());
+  
   const [freeSlots, setFreeSlots] = useState(
     [{
       id: 1000,
