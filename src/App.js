@@ -56,14 +56,16 @@ function App() {
   const [date, setDate] = React.useState(dayjs('2022-04-07'));
   return (
     <>
-      <img src={icon} alt="" />
+      <div className='head'>
+        <img src={icon} alt="" />
+      </div>
       <div className="App">
         <div className='col col-1'>
           <div>Find Free Slots</div>
           <LocalizationProvider dateAdapter={AdapterDayjs}>
-            <CalendarPicker className='date-picker' date={date} onChange={(newDate) =>{ setDate(newDate)}} />
+            <CalendarPicker className='date-picker' date={date} onChange={(newDate) => { setDate(newDate) }} />
           </LocalizationProvider>
-          
+
           <Button className='find-btn btn' appearance="primary" active>
             FIND
           </Button>
@@ -72,7 +74,7 @@ function App() {
           {freeSlots.map((ele) => {
             return (
               <Slot
-              key={ele.id}
+                key={ele.id}
                 // name={ele.name}
                 date={ele.date.toString()}
                 from={ele.from}
