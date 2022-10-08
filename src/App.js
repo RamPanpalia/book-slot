@@ -13,47 +13,48 @@ import { CalendarPicker } from '@mui/x-date-pickers/CalendarPicker';
 
 
 function App() {
-  
+
+  const [date, setDate] = React.useState(dayjs('2022-04-07'));
+  const [phone_id, setPhone_id] = useState('gAAAAABjPGG-aYwzpbW7FWrlHlKhWL76ZYqp5OjLd9h7mCa-BOrALaiZsv5359YZ0gVJ1gwpA4eflxPCc9sDYxvnEx4wnzGXgA==')
+  const [start_time, setStart_time] = useState('2022-10-10T17:48:55Z')
+  const [end_time, setEnd_time] = useState('2022-10-11T17:48:55Z')
   const [freeSlots, setFreeSlots] = useState(
     [{
       id: 1000,
       name: 'Dr. Sunil Verma',
       date: new Date(),
-      from: '3PM',
-      till: '3:30PM',
+      start: '3PM',
+      end: '3:30PM',
     },
     {
       id: 1001,
       name: 'Dr. Prabhakar Mishra',
       date: new Date(),
-      from: '3:30PM',
-      till: '4PM',
+      start: '3:30PM',
+      end: '4PM',
     },
     {
       id: 1002,
       name: 'Dr. Ajay Raut',
       date: new Date(),
-      from: '3PM',
-      till: '3:30PM',
+      start: '3PM',
+      end: '3:30PM',
     },
     {
       id: 1003,
       name: 'Dr. John Doe',
       date: new Date(),
-      from: '4:30PM',
-      till: '5PM',
-    },
-    {
-      id: 1004,
-      name: 'Dr. John Doe',
-      date: new Date(),
-      from: '1PM',
-      till: '1:30PM',
+      start: '4:30PM',
+      end: '5PM',
     },
     ]
   );
 
-  const [date, setDate] = React.useState(dayjs('2022-04-07'));
+  function findSlots() {
+    fetch(`http://ec2-13-232-196-86.ap-south-1.compute.amazonaws.com/get_free_dates?phone_id=${phone_id}&start_time=${start_time}&end_time=${end_time}`)
+      .then((res) => { setFreeSlots(res) })
+      .catch((err) => { console.log(err) })
+  }
   return (
     <>
       <div className='head'>
@@ -66,7 +67,7 @@ function App() {
             <CalendarPicker className='date-picker' date={date} onChange={(newDate) => { setDate(newDate) }} />
           </LocalizationProvider>
 
-          <Button className='find-btn btn' appearance="primary" active>
+          <Button className='find-btn btn' appearance="primary" active onClick={findSlots}>
             FIND
           </Button>
         </div>
@@ -77,8 +78,8 @@ function App() {
                 key={ele.id}
                 // name={ele.name}
                 date={ele.date.toString()}
-                from={ele.from}
-                till={ele.till}
+                from={ele.start}
+                till={ele.end}
               />)
           })}
           {/* <Slot/>
