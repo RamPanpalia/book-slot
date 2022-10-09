@@ -1,4 +1,4 @@
-import React, { useState } from 'react';
+import React, { useState,useEffect } from 'react';
 import './App.css';
 import icon from './FOOZIE.webp'
 import Slot from './Slot'
@@ -38,6 +38,11 @@ function App() {
     .then((res) => { setFreeSlots(res.data) })
     .catch((err) => { console.log(err) })
   }
+
+  useEffect(() => {
+    setFreeSlots()
+    findSlots();
+  }, [start_time]);
   return (
     <>
       <div className='head'>
