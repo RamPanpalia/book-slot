@@ -7,7 +7,7 @@ const Slot = (props) => {
     return (
         <div className='slot'>
             {/* <div className='name'>{props.name}</div> */}
-            <div className='Date'>{props.date.slice(0,24)}</div>
+            {/* <div className='Date'>{props.date.slice(0,24)}</div> */}
             <div className='time'>
                 <span className='from'>{props.from}</span>
                 -
