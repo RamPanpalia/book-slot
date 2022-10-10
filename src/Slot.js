@@ -18,13 +18,13 @@ const Slot = (props) => {
             //     }
             // }
         )
-            .then((res => {
-                setBookingStatus(res.data.status, notify_success(res.data.status));
-            }))
-            .catch((err) => {
-                console.log(err)
-                setBookingStatus(err.response.data, notify_error(err.response.data));
-            })
+        .then((res => {
+            setBookingStatus(res.data.status, notify_success(res.data.status));
+        }))
+        .catch((err) => {
+            console.log(err)
+            setBookingStatus(err.response.data, notify_error(err.response.data));
+        })
         // console.log(props.slot_id)
     }
     async function notify_success(x) {
@@ -57,7 +57,7 @@ const Slot = (props) => {
             {/* <div className='name'>{props.name}</div> */}
             {/* <div className='Date'>{props.date.slice(0,24)}</div> */}
             <div className='time'>
-                <span className='from'>{props.start_time}</span>
+                <span className='from'>{new Date(props.start_time).toLocaleString()}</span>
                 -
                 <span className='till'>{props.end_time}</span>
                 <span className='Duration'>30 Min.</span>
