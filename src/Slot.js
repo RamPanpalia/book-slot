@@ -9,18 +9,6 @@ import 'react-toastify/dist/ReactToastify.css';
 const Slot = (props) => {
     //Slot already exists/booked
     const [booking_status, setBookingStatus] = React.useState()
-    const notify = () =>{ 
-        toast(`${ booking_status }`, {
-            position: "top-right",
-            autoClose: 5000,
-            hideProgressBar: false,
-            closeOnClick: true,
-            pauseOnHover: true,
-            draggable: true,
-            progress: undefined,
-            theme: "light",
-            });
-        };
     async function book_slot() {
         axios.post(`http://ec2-13-232-196-86.ap-south-1.compute.amazonaws.com/book_slot?phone_id=gAAAAABjPGG-aYwzpbW7FWrlHlKhWL76ZYqp5OjLd9h7mCa-BOrALaiZsv5359YZ0gVJ1gwpA4eflxPCc9sDYxvnEx4wnzGXgA==&slot_id=${props.slot_id}`,
             // {
@@ -31,15 +19,38 @@ const Slot = (props) => {
             // }
         )
             .then((res => {
-                setBookingStatus(res.data.status);
-                notify();
+                setBookingStatus(res.data.status, notify_success(res.data.status));
             }))
             .catch((err) => {
-                setBookingStatus(err.response.data);
-                notify();
+                console.log(err)
+                setBookingStatus(err.response.data, notify_error(err.response.data));
             })
         // console.log(props.slot_id)
     }
+    async function notify_success(x) {
+        return toast.success(`${x}`, {
+            position: "top-right",
+            autoClose: 5000,
+            hideProgressBar: true,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true,
+            progress: undefined,
+            theme: "light",
+        });
+    };
+    async function notify_error(x) {
+        return toast.error(`${x}`, {
+            position: "top-right",
+            autoClose: 5000,
+            hideProgressBar: true,
+            closeOnClick: true,
+            pauseOnHover: true,
+            draggable: true,
+            progress: undefined,
+            theme: "light",
+        });
+    };
 
     return (
         <div className='slot'>
