@@ -11,7 +11,7 @@ img{
 }
 .App {
     display: grid;
-    grid-template-columns: 4fr 7fr 2fr;
+    grid-template-columns: 4fr 8fr 1fr;
     font-size: 16px;
     background-color: #f4f2ed;
 }
@@ -58,8 +58,8 @@ img{
     border: 1px solid rgb(104, 104, 104);
     /* border-radius: 4px; */
     padding: 20px 20px;
-    margin: 10px 0px;
-    width: 100%;
+    margin: 10px 10px;
+    /* width: 100%; */
 }
 
 .time span {
@@ -79,6 +79,11 @@ img{
     margin: auto;
 }
 
+.col-2{
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+}
+
 @media screen and (max-width:850px) {
     .App {
         display: block;
@@ -91,5 +96,8 @@ img{
     .slot{
         padding: 10px;
         margin: 4px 0;
+    }
+    .col-2{
+        grid-template-columns: 1fr;
     }
 }

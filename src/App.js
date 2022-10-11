@@ -10,7 +10,7 @@ import { LocalizationProvider } from '@mui/x-date-pickers/LocalizationProvider';
 import { CalendarPicker } from '@mui/x-date-pickers/CalendarPicker';
 import CircularProgress from '@mui/material/CircularProgress';
 import Box from '@mui/material/Box';
-import { add } from 'date-fns'
+import { format, add, startOfDay, endOfDay,isToday } from 'date-fns'
 
 function App() {
   const urlSearch=window.location.search;
@@ -20,10 +20,12 @@ function App() {
   const [date, setDate] = React.useState(dayjs(new Date()));
   // const [phone_id, setPhone_id] = useState('gAAAAABjPGG-aYwzpbW7FWrlHlKhWL76ZYqp5OjLd9h7mCa-BOrALaiZsv5359YZ0gVJ1gwpA4eflxPCc9sDYxvnEx4wnzGXgA==')
   const [start_time, setStart_time] = useState(new Date().toISOString())
-  const [end_time, setEnd_time] = useState(add(new Date(), { days: 1 }).toISOString())
+  const [end_time, setEnd_time] = useState(endOfDay(new Date()).toISOString())
   const [freeSlots, setFreeSlots] = useState();
   var phone_id=urlParams.getAll('phone_id') && 'gAAAAABjPGG-aYwzpbW7FWrlHlKhWL76ZYqp5OjLd9h7mCa-BOrALaiZsv5359YZ0gVJ1gwpA4eflxPCc9sDYxvnEx4wnzGXgA=='
   
+  // console.log(new Date(start_time).getDate())
+  // console.log(.toString(),'it somes here');
   async function findSlots() {
     axios.get(`${apiURL}/get_free_dates`, {
       params: {
@@ -34,6 +36,9 @@ function App() {
     })
       .then((res) => { setFreeSlots(res.data) })
       .catch((err) => { console.log(err) })
+  }
+  function disableWeekends(date) {
+    return new Date(date).getDay() === 0 || new Date(date).getDay() === 6;
   }
 
   useEffect(() => {
@@ -53,20 +58,26 @@ function App() {
               className='date-picker'
               date={date}
               disablePast={true}
+              shouldDisableDate={disableWeekends} 
+              maxDate={add(new Date(),{days:7})}
               onChange={(newDate) => {
                 setDate(newDate);
-                setStart_time(newDate.toISOString());
-                setEnd_time(add(new Date(newDate), { days: 1 }).toISOString());
+                if(isToday(new Date(newDate))){
+                  setStart_time(new Date().toISOString());                  
+                }
+                else{              
+                  setStart_time(startOfDay(new Date(newDate)).toISOString());                  
+                }
+                setEnd_time(endOfDay(new Date(newDate)).toISOString());
                 findSlots();
               }} />
           </LocalizationProvider>
         </div>
         <div className='col col-2'>
-          <div>
+          {/* <div>
             Available Slots from
-            {' '+ start_time.slice(0, 10)} {start_time.slice(11, 16) +' '}
-            to {end_time.slice(0, 10)} {end_time.slice(11, 16)}
-          </div>
+            {new Date(start_time).toLocaleString() +'to'+new Date(end_time).toLocaleString() }
+          </div> */}
           {freeSlots != null ? freeSlots.map((ele) => {
             return (
               <Slot

@@ -5,7 +5,7 @@ import { Button } from 'rsuite';
 import axios from 'axios';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
-import {format} from 'date-fns'
+import {differenceInMinutes, format} from 'date-fns'
 
 const Slot = (props) => {
     //Slot already exists/booked
@@ -56,13 +56,13 @@ const Slot = (props) => {
 
     return (
         <div className='slot'>
-            <div className='date' style={{paddingBottom:0}}>{format(new Date(props.start_time),'dd-MMM-yy').toLocaleString()}</div>
-            <div className='time'>
+            <div className='date' style={{paddingBottom:0}}>{format(new Date(props.start_time),'dd-MMM-yy, EE').toLocaleString()}</div>
+            <div className='time' style={{paddingBottom:'0'}}>
                 <span className='from'>{format(new Date(props.start_time),'hh-mm a').toLocaleString()}</span>
                 -
                 <span className='till'>{format(new Date(props.end_time),'hh-mm a').toLocaleString()}</span>
-                <span className='Duration'>30 Min.</span>
             </div>
+            <div className='Duration'>{differenceInMinutes(new Date(props.end_time),new Date(props.start_time))} Min.</div>
             <ToastContainer
                 position="top-right"
                 autoClose={5000}
