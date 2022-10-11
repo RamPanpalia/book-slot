@@ -13,15 +13,19 @@ import Box from '@mui/material/Box';
 import { add } from 'date-fns'
 
 function App() {
-
+  const urlSearch=window.location.search;
+  const urlParams = new URLSearchParams(urlSearch);
+  
+  const apiURL='http://ec2-13-232-196-86.ap-south-1.compute.amazonaws.com'
   const [date, setDate] = React.useState(dayjs(new Date()));
-  const [phone_id, setPhone_id] = useState('gAAAAABjPGG-aYwzpbW7FWrlHlKhWL76ZYqp5OjLd9h7mCa-BOrALaiZsv5359YZ0gVJ1gwpA4eflxPCc9sDYxvnEx4wnzGXgA==')
+  // const [phone_id, setPhone_id] = useState('gAAAAABjPGG-aYwzpbW7FWrlHlKhWL76ZYqp5OjLd9h7mCa-BOrALaiZsv5359YZ0gVJ1gwpA4eflxPCc9sDYxvnEx4wnzGXgA==')
   const [start_time, setStart_time] = useState(new Date().toISOString())
   const [end_time, setEnd_time] = useState(add(new Date(), { days: 1 }).toISOString())
   const [freeSlots, setFreeSlots] = useState();
-
+  var phone_id=urlParams.getAll('phone_id') && 'gAAAAABjPGG-aYwzpbW7FWrlHlKhWL76ZYqp5OjLd9h7mCa-BOrALaiZsv5359YZ0gVJ1gwpA4eflxPCc9sDYxvnEx4wnzGXgA=='
+  
   async function findSlots() {
-    axios.get('http://ec2-13-232-196-86.ap-south-1.compute.amazonaws.com/get_free_dates', {
+    axios.get(`${apiURL}/get_free_dates`, {
       params: {
         phone_id: phone_id,
         start_time: start_time,
@@ -71,6 +75,7 @@ function App() {
                 // date={new Date().toString()}
                 start_time={ele.start}
                 end_time={ele.end}
+                phone_id={phone_id}
               />)
           }) : <div className='loading'>
             <Box sx={{ display: 'flex' }}>

@@ -5,12 +5,14 @@ import { Button } from 'rsuite';
 import axios from 'axios';
 import { ToastContainer, toast } from 'react-toastify';
 import 'react-toastify/dist/ReactToastify.css';
+import {format} from 'date-fns'
 
 const Slot = (props) => {
     //Slot already exists/booked
+    const apiURL='http://ec2-13-232-196-86.ap-south-1.compute.amazonaws.com'
     const [booking_status, setBookingStatus] = React.useState()
     async function book_slot() {
-        axios.post(`http://ec2-13-232-196-86.ap-south-1.compute.amazonaws.com/book_slot?phone_id=gAAAAABjPGG-aYwzpbW7FWrlHlKhWL76ZYqp5OjLd9h7mCa-BOrALaiZsv5359YZ0gVJ1gwpA4eflxPCc9sDYxvnEx4wnzGXgA==&slot_id=${props.slot_id}`,
+        axios.post(`${apiURL}/book_slot?phone_id=${props.phone_id}&slot_id=${props.slot_id}`,
             // {
             //     params:{
             //         phone_id:'gAAAAABjPGG-aYwzpbW7FWrlHlKhWL76ZYqp5OjLd9h7mCa-BOrALaiZsv5359YZ0gVJ1gwpA4eflxPCc9sDYxvnEx4wnzGXgA==',
@@ -54,12 +56,11 @@ const Slot = (props) => {
 
     return (
         <div className='slot'>
-            {/* <div className='name'>{props.name}</div> */}
-            {/* <div className='Date'>{props.date.slice(0,24)}</div> */}
+            <div className='date' style={{paddingBottom:0}}>{format(new Date(props.start_time),'dd-MMM-yy').toLocaleString()}</div>
             <div className='time'>
-                <span className='from'>{new Date(props.start_time).toLocaleString()}</span>
+                <span className='from'>{format(new Date(props.start_time),'hh-mm a').toLocaleString()}</span>
                 -
-                <span className='till'>{props.end_time}</span>
+                <span className='till'>{format(new Date(props.end_time),'hh-mm a').toLocaleString()}</span>
                 <span className='Duration'>30 Min.</span>
             </div>
             <ToastContainer
